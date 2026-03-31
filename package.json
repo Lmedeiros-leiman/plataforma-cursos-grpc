@@ -1,0 +1,19 @@
+{
+  "name": "toolinglayer",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "node Tooling/dev-web.js",
+    "build": "node Tooling/build.js",
+    "clean": "node Tooling/clean.js",
+    "clean:full": "node Tooling/clean.js --full",
+    "proto:lint": "buf lint",
+    "proto:generate": "buf generate"
+  },
+  "devDependencies": {
+    "@bufbuild/buf": "^1.66.1",
+    "chalk": "^5.6.2",
+    "chokidar": "^5.0.0",
+    "fs-extra": "^11.3.4"
+  }
+}

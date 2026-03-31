@@ -1,0 +1,11 @@
+version: v1
+
+# C# já gerá sozinho pra si os arquivos protobuff.
+plugins: 
+  - plugin: buf.build/connectrpc/es
+    out: Web/src/lib/gen
+    opt:
+      - target=ts
+
+  - plugin: buf.build/protocolbuffers/js
+    out: Web/src/lib/gen
