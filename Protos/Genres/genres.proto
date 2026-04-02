@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+option csharp_namespace = "Server.Features.Genres";
+
+package genres;
+
+service GenreCatalog {
+  rpc ListGenres (ListGenresRequest) returns (ListGenresResponse);
+  rpc GetGenreById (GetGenreByIdRequest) returns (GetGenreByIdResponse);
+  rpc CreateGenre (CreateGenreRequest) returns (CreateGenreResponse);
+  rpc UpdateGenre (UpdateGenreRequest) returns (UpdateGenreResponse);
+  rpc DeleteGenre (DeleteGenreRequest) returns (DeleteGenreResponse);
+}
+
+message ListGenresRequest {
+  int32 cursor = 1;
+  int32 page_size = 2;
+  string name = 3;
+}
+
+message ListGenresResponse {
+  repeated GenreItem genres = 1;
+  int32 next_cursor = 2;
+}
+
+message GetGenreByIdRequest {
+  int32 genre_id = 1;
+}
+
+message CreateGenreRequest {
+  string name = 1;
+}
+
+message UpdateGenreRequest {
+  int32 genre_id = 1;
+  string name = 2;
+}
+
+message GetGenreByIdResponse {
+  GenreItem genre = 1;
+}
+
+message CreateGenreResponse {
+  GenreItem genre = 1;
+}
+
+message UpdateGenreResponse {
+  GenreItem genre = 1;
+}
+
+message DeleteGenreRequest {
+  GenreItem genre = 1;
+}
+
+message DeleteGenreResponse {
+  int32 genre_id = 1;
+  string message = 2;
+}
+
+message GenreItem {
+  int32 genre_id = 1;
+  string name = 2;
+}
