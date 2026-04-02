@@ -1,0 +1,85 @@
+syntax = "proto3";
+
+option csharp_namespace = "Server.Features.Invoices";
+
+package invoices;
+
+service InvoiceCatalog {
+  rpc ListInvoices (ListInvoicesRequest) returns (ListInvoicesResponse);
+  rpc GetInvoiceById (GetInvoiceByIdRequest) returns (GetInvoiceByIdResponse);
+  rpc CreateInvoice (CreateInvoiceRequest) returns (CreateInvoiceResponse);
+  rpc UpdateInvoice (UpdateInvoiceRequest) returns (UpdateInvoiceResponse);
+  rpc DeleteInvoice (DeleteInvoiceRequest) returns (DeleteInvoiceResponse);
+}
+
+message ListInvoicesRequest {
+  int32 cursor = 1;
+  int32 page_size = 2;
+  int32 customer_id = 3;
+}
+
+message ListInvoicesResponse {
+  repeated InvoiceItem invoices = 1;
+  int32 next_cursor = 2;
+}
+
+message GetInvoiceByIdRequest {
+  int32 invoice_id = 1;
+}
+
+message CreateInvoiceRequest {
+  int32 customer_id = 1;
+  string invoice_date = 2;
+  string billing_address = 3;
+  string billing_city = 4;
+  string billing_state = 5;
+  string billing_country = 6;
+  string billing_postal_code = 7;
+  double total = 8;
+}
+
+message UpdateInvoiceRequest {
+  int32 invoice_id = 1;
+  int32 customer_id = 2;
+  string invoice_date = 3;
+  string billing_address = 4;
+  string billing_city = 5;
+  string billing_state = 6;
+  string billing_country = 7;
+  string billing_postal_code = 8;
+  double total = 9;
+}
+
+message GetInvoiceByIdResponse {
+  InvoiceItem invoice = 1;
+}
+
+message CreateInvoiceResponse {
+  InvoiceItem invoice = 1;
+}
+
+message UpdateInvoiceResponse {
+  InvoiceItem invoice = 1;
+}
+
+message DeleteInvoiceRequest {
+  InvoiceItem invoice = 1;
+}
+
+message DeleteInvoiceResponse {
+  int32 invoice_id = 1;
+  string message = 2;
+}
+
+message InvoiceItem {
+  int32 invoice_id = 1;
+  int32 customer_id = 2;
+  string customer_name = 3;
+  string invoice_date = 4;
+  string billing_address = 5;
+  string billing_city = 6;
+  string billing_state = 7;
+  string billing_country = 8;
+  string billing_postal_code = 9;
+  double total = 10;
+}
