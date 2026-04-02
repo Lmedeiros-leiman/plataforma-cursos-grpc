@@ -11,7 +11,7 @@ namespace ChinookDatabase.DataModel
         public int InvoiceLineId { get; set; }
 
         [Required]
-        public int CustomerId { get; set; }
+        public int InvoiceId { get; set; }
 
         [Required]
         public int TrackId { get; set; }
@@ -22,8 +22,8 @@ namespace ChinookDatabase.DataModel
         [Required]
         public int Quantity { get; set; }
 
-        [ForeignKey("CustomerId")]
-        public Customer Customer { get; set; }
+        [ForeignKey("InvoiceId")]
+        public Invoice Invoice { get; set; }
 
         [ForeignKey("TrackId")]
         public Track Track { get; set; }
