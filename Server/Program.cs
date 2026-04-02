@@ -8,8 +8,10 @@ using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
+var defaultConnectionString = $"Data Source={Path.Combine(builder.Environment.ContentRootPath, "Chinook_Sqlite.sqlite")}";
+
 builder.Services.AddDbContext<ChinookContext>(opt =>
-    opt.UseSqlite(builder.Configuration.GetConnectionString("Chinook") ?? "Data Source=Chinook_Sqlite.sqlite"));
+    opt.UseSqlite(builder.Configuration.GetConnectionString("Chinook") ?? defaultConnectionString));
 
 builder.Services.AddValidatorsFromAssemblyContaining<Program>();
 builder.Services.AddSingleton<GrpcValidationPolicyRegistry>();
