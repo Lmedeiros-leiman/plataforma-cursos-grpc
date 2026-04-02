@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+option csharp_namespace = "Server.Features.Playlists";
+
+package playlists;
+
+service PlaylistCatalog {
+  rpc ListPlaylists (ListPlaylistsRequest) returns (ListPlaylistsResponse);
+  rpc GetPlaylistById (GetPlaylistByIdRequest) returns (GetPlaylistByIdResponse);
+  rpc CreatePlaylist (CreatePlaylistRequest) returns (CreatePlaylistResponse);
+  rpc UpdatePlaylist (UpdatePlaylistRequest) returns (UpdatePlaylistResponse);
+  rpc DeletePlaylist (DeletePlaylistRequest) returns (DeletePlaylistResponse);
+}
+
+message ListPlaylistsRequest {
+  int32 cursor = 1;
+  int32 page_size = 2;
+  string name = 3;
+}
+
+message ListPlaylistsResponse {
+  repeated PlaylistItem playlists = 1;
+  int32 next_cursor = 2;
+}
+
+message GetPlaylistByIdRequest {
+  int32 playlist_id = 1;
+}
+
+message CreatePlaylistRequest {
+  string name = 1;
+}
+
+message UpdatePlaylistRequest {
+  int32 playlist_id = 1;
+  string name = 2;
+}
+
+message GetPlaylistByIdResponse {
+  PlaylistItem playlist = 1;
+}
+
+message CreatePlaylistResponse {
+  PlaylistItem playlist = 1;
+}
+
+message UpdatePlaylistResponse {
+  PlaylistItem playlist = 1;
+}
+
+message DeletePlaylistRequest {
+  PlaylistItem playlist = 1;
+}
+
+message DeletePlaylistResponse {
+  int32 playlist_id = 1;
+  string message = 2;
+}
+
+message PlaylistItem {
+  int32 playlist_id = 1;
+  string name = 2;
+}
