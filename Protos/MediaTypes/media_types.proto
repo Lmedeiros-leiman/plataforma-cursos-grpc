@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+option csharp_namespace = "Server.Features.MediaTypes";
+
+package media_types;
+
+service MediaTypeCatalog {
+  rpc ListMediaTypes (ListMediaTypesRequest) returns (ListMediaTypesResponse);
+  rpc GetMediaTypeById (GetMediaTypeByIdRequest) returns (GetMediaTypeByIdResponse);
+  rpc CreateMediaType (CreateMediaTypeRequest) returns (CreateMediaTypeResponse);
+  rpc UpdateMediaType (UpdateMediaTypeRequest) returns (UpdateMediaTypeResponse);
+  rpc DeleteMediaType (DeleteMediaTypeRequest) returns (DeleteMediaTypeResponse);
+}
+
+message ListMediaTypesRequest {
+  int32 cursor = 1;
+  int32 page_size = 2;
+  string name = 3;
+}
+
+message ListMediaTypesResponse {
+  repeated MediaTypeItem media_types = 1;
+  int32 next_cursor = 2;
+}
+
+message GetMediaTypeByIdRequest {
+  int32 media_type_id = 1;
+}
+
+message CreateMediaTypeRequest {
+  string name = 1;
+}
+
+message UpdateMediaTypeRequest {
+  int32 media_type_id = 1;
+  string name = 2;
+}
+
+message GetMediaTypeByIdResponse {
+  MediaTypeItem media_type = 1;
+}
+
+message CreateMediaTypeResponse {
+  MediaTypeItem media_type = 1;
+}
+
+message UpdateMediaTypeResponse {
+  MediaTypeItem media_type = 1;
+}
+
+message DeleteMediaTypeRequest {
+  MediaTypeItem media_type = 1;
+}
+
+message DeleteMediaTypeResponse {
+  int32 media_type_id = 1;
+  string message = 2;
+}
+
+message MediaTypeItem {
+  int32 media_type_id = 1;
+  string name = 2;
+}
