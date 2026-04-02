@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+option csharp_namespace = "Server.Features.Artists";
+
+package artists;
+
+service ArtistCatalog {
+  rpc ListArtists (ListArtistsRequest) returns (ListArtistsResponse);
+  rpc GetArtistById (GetArtistByIdRequest) returns (GetArtistByIdResponse);
+  rpc CreateArtist (CreateArtistRequest) returns (CreateArtistResponse);
+  rpc UpdateArtist (UpdateArtistRequest) returns (UpdateArtistResponse);
+  rpc DeleteArtist (DeleteArtistRequest) returns (DeleteArtistResponse);
+}
+
+message ListArtistsRequest {
+  int32 cursor = 1;
+  int32 page_size = 2;
+  string name = 3;
+}
+
+message ListArtistsResponse {
+  repeated ArtistItem artists = 1;
+  int32 next_cursor = 2;
+}
+
+message GetArtistByIdRequest {
+  int32 artist_id = 1;
+}
+
+message CreateArtistRequest {
+  string name = 1;
+}
+
+message UpdateArtistRequest {
+  int32 artist_id = 1;
+  string name = 2;
+}
+
+message GetArtistByIdResponse {
+  ArtistItem artist = 1;
+}
+
+message CreateArtistResponse {
+  ArtistItem artist = 1;
+}
+
+message UpdateArtistResponse {
+  ArtistItem artist = 1;
+}
+
+message DeleteArtistRequest {
+  ArtistItem artist = 1;
+}
+
+message DeleteArtistResponse {
+  int32 artist_id = 1;
+  string message = 2;
+}
+
+message ArtistItem {
+  int32 artist_id = 1;
+  string name = 2;
+}
