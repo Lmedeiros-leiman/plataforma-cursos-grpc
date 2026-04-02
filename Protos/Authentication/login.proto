@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option csharp_namespace = "Server.Features.Authentication.User";
+
+package authentication.user;
+
+service UserLogin {
+  rpc SignIn (UserSignInRequest) returns (UserSignInReply);
+}
+
+message UserSignInRequest {
+  string credential = 1;
+}
+
+message UserSignInReply {
+  int32 customer_id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string company = 4;
+  string email = 5;
+  string phone = 6;
+  string fax = 7;
+}
