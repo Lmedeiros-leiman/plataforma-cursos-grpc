@@ -1,17 +1,15 @@
-﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
-using System.Runtime.Serialization;
+using Microsoft.EntityFrameworkCore;
 
 namespace ChinookDatabase.DataModel
 {
+    [PrimaryKey(nameof(PlaylistId), nameof(TrackId))]
     [DebuggerDisplay("PlaylistId = {PlaylistId}, TrackId = {TrackId}")]
     public class PlaylistTrack
     {
-        [Key, Column(Order=1)]
         public int PlaylistId { get; set; }
 
-        [Key, Column(Order = 2)]
         public int TrackId { get; set; }
 
         [ForeignKey("PlaylistId")]

@@ -1,0 +1,72 @@
+syntax = "proto3";
+
+option csharp_namespace = "Server.Features.PlaylistTracks";
+
+package playlist_tracks;
+
+service PlaylistTrackCatalog {
+  rpc ListPlaylistTracks (ListPlaylistTracksRequest) returns (ListPlaylistTracksResponse);
+  rpc GetPlaylistTrackById (GetPlaylistTrackByIdRequest) returns (GetPlaylistTrackByIdResponse);
+  rpc CreatePlaylistTrack (CreatePlaylistTrackRequest) returns (CreatePlaylistTrackResponse);
+  rpc UpdatePlaylistTrack (UpdatePlaylistTrackRequest) returns (UpdatePlaylistTrackResponse);
+  rpc DeletePlaylistTrack (DeletePlaylistTrackRequest) returns (DeletePlaylistTrackResponse);
+}
+
+message ListPlaylistTracksRequest {
+  int32 playlist_id = 1;
+  int32 cursor_playlist_id = 2;
+  int32 cursor_track_id = 3;
+  int32 page_size = 4;
+}
+
+message ListPlaylistTracksResponse {
+  repeated PlaylistTrackItem playlist_tracks = 1;
+  int32 next_cursor_playlist_id = 2;
+  int32 next_cursor_track_id = 3;
+}
+
+message GetPlaylistTrackByIdRequest {
+  int32 playlist_id = 1;
+  int32 track_id = 2;
+}
+
+message CreatePlaylistTrackRequest {
+  int32 playlist_id = 1;
+  int32 track_id = 2;
+}
+
+message UpdatePlaylistTrackRequest {
+  int32 playlist_id = 1;
+  int32 track_id = 2;
+  int32 new_playlist_id = 3;
+  int32 new_track_id = 4;
+}
+
+message GetPlaylistTrackByIdResponse {
+  PlaylistTrackItem playlist_track = 1;
+}
+
+message CreatePlaylistTrackResponse {
+  PlaylistTrackItem playlist_track = 1;
+}
+
+message UpdatePlaylistTrackResponse {
+  PlaylistTrackItem playlist_track = 1;
+}
+
+message DeletePlaylistTrackRequest {
+  PlaylistTrackItem playlist_track = 1;
+}
+
+message DeletePlaylistTrackResponse {
+  int32 playlist_id = 1;
+  int32 track_id = 2;
+  string message = 3;
+}
+
+message PlaylistTrackItem {
+  int32 playlist_id = 1;
+  string playlist_name = 2;
+  int32 track_id = 3;
+  string track_name = 4;
+}
