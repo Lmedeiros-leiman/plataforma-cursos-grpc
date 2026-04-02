@@ -1,0 +1,102 @@
+syntax = "proto3";
+
+option csharp_namespace = "Server.Features.Authentication.Admins";
+
+package authentication.admins;
+
+service AdminCatalog {
+  rpc ListAdmins (ListAdminsRequest) returns (ListAdminsResponse);
+  rpc GetAdminById (GetAdminByIdRequest) returns (GetAdminByIdResponse);
+  rpc CreateAdmin (CreateAdminRequest) returns (CreateAdminResponse);
+  rpc UpdateAdmin (UpdateAdminRequest) returns (UpdateAdminResponse);
+  rpc DeleteAdmin (DeleteAdminRequest) returns (DeleteAdminResponse);
+}
+
+message ListAdminsRequest {
+  int32 cursor = 1;
+  int32 page_size = 2;
+  string query = 3;
+}
+
+message ListAdminsResponse {
+  repeated AdminItem admins = 1;
+  int32 next_cursor = 2;
+}
+
+message GetAdminByIdRequest {
+  int32 employee_id = 1;
+}
+
+message CreateAdminRequest {
+  string first_name = 1;
+  string last_name = 2;
+  string title = 3;
+  int32 reports_to = 4;
+  string birth_date = 5;
+  string hire_date = 6;
+  string address = 7;
+  string city = 8;
+  string state = 9;
+  string country = 10;
+  string postal_code = 11;
+  string phone = 12;
+  string fax = 13;
+  string email = 14;
+}
+
+message UpdateAdminRequest {
+  int32 employee_id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string title = 4;
+  int32 reports_to = 5;
+  string birth_date = 6;
+  string hire_date = 7;
+  string address = 8;
+  string city = 9;
+  string state = 10;
+  string country = 11;
+  string postal_code = 12;
+  string phone = 13;
+  string fax = 14;
+  string email = 15;
+}
+
+message GetAdminByIdResponse {
+  AdminItem admin = 1;
+}
+
+message CreateAdminResponse {
+  AdminItem admin = 1;
+}
+
+message UpdateAdminResponse {
+  AdminItem admin = 1;
+}
+
+message DeleteAdminRequest {
+  AdminItem admin = 1;
+}
+
+message DeleteAdminResponse {
+  int32 employee_id = 1;
+  string message = 2;
+}
+
+message AdminItem {
+  int32 employee_id = 1;
+  string first_name = 2;
+  string last_name = 3;
+  string title = 4;
+  int32 reports_to = 5;
+  string birth_date = 6;
+  string hire_date = 7;
+  string address = 8;
+  string city = 9;
+  string state = 10;
+  string country = 11;
+  string postal_code = 12;
+  string phone = 13;
+  string fax = 14;
+  string email = 15;
+}
