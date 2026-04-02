@@ -1,23 +1,30 @@
-﻿using System.ComponentModel.DataAnnotations;
+using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Diagnostics;
 
 namespace ChinookDatabase.DataModel
 {
-    [DebuggerDisplay("{FirstName} {LastName} (CustomerId = {CustomerId})")]
-    public class Customer
+    [DebuggerDisplay("{FirstName} {LastName} (EmployeeId = {EmployeeId})")]
+    public class Employee
     {
         [Key]
-        public int CustomerId { get; set; }
-
-        [Required, MaxLength(20)]
-        public string FirstName { get; set; }
+        public int EmployeeId { get; set; }
 
         [Required, MaxLength(20)]
         public string LastName { get; set; }
 
-        [MaxLength(80)]
-        public string Company { get; set; }
+        [Required, MaxLength(20)]
+        public string FirstName { get; set; }
+
+        [MaxLength(30)]
+        public string Title { get; set; }
+
+        public int ReportsTo { get; set; }
+
+        public DateTime BirthDate { get; set; }
+
+        public DateTime HireDate { get; set; }
 
         [MaxLength(70)]
         public string Address { get; set; }
@@ -43,9 +50,7 @@ namespace ChinookDatabase.DataModel
         [MaxLength(60)]
         public string Email { get; set; }
 
-        public int SupportRepId { get; set; }
-
-        [ForeignKey("SupportRepId")]
-        public Employee SupportRep { get; set; }
+        [ForeignKey("ReportsTo")]
+        public Employee ReportsToManager { get; set; }
     }
 }
